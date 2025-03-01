@@ -5,6 +5,7 @@ import { userRoutes } from './http/controllers/users/routes'
 import { postRoutes } from './http/controllers/posts/routes'
 import { env } from './env'
 import fastifyCors from '@fastify/cors'
+import { likeRoutes } from './http/controllers/likes/routes'
 
 
 export const app = fastify()
@@ -31,6 +32,7 @@ app.register(fastifyCors, {
 
 app.register(userRoutes)
 app.register(postRoutes)
+app.register(likeRoutes)
 
 app.setErrorHandler((error, request, reply) => {
     if (error instanceof z.ZodError) {
