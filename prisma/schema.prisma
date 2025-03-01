@@ -20,7 +20,7 @@ model User {
   password String
   photo    String?
 
-  posts Post[]  
+  posts Post[]
 
   @@map("users")
 }
@@ -31,8 +31,42 @@ model Post {
   content    String
   created_at DateTime
 
-  userId String
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId   String
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  likes    Like[]
+  comments Comment[]
 
   @@map("posts")
+}
+
+model Like {
+  id         String   @id @default(uuid())
+  created_at DateTime
+
+  postId String
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@map("likes")
+}
+
+model Comment {
+  id         String   @id @default(uuid())
+  content    String
+  created_at DateTime
+
+  postId String
+  post   Post           @relation(fields: [postId], references: [id], onDelete: Cascade)
+  likes  Comment_Like[]
+
+  @@map("comments")
+}
+
+model Comment_Like {
+  id         String   @id @default(uuid())
+  created_at DateTime
+
+  commentId String
+  comment   Comment @relation(fields: [commentId], references: [id], onDelete: Cascade)
+
+  @@map("comment_likes")
 }
