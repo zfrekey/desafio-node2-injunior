@@ -17,6 +17,15 @@ export class PrismaCommentsRepository implements CommentsRepository {
         const comments = await prisma.comment.findMany()
         return comments
     }
+
+    async listByUser(userId: string): Promise<Comment[]> {
+        const comments = await prisma.comment.findMany({
+            where: {
+                userId
+            }
+        })
+        return comments
+    }
     
     async deleteComment(id: string): Promise<Comment | null> {
         const comment = await prisma.comment.delete({

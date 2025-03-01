@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify"
 import { ResourceNotFoundError } from "@/use-cases/errors/resourceNotFound"
-import { ListCommentUseCase } from "@/use-cases/listaCommentUseCase"
+import { ListCommentUseCase } from "@/use-cases/listCommentsUseCase"
 import { PrismaCommentsRepository } from "@/repositories/prisma/prismaCommentsRepository"
 
 export async function list(request: FastifyRequest, reply: FastifyReply) {

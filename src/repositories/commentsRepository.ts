@@ -4,4 +4,5 @@ export interface CommentsRepository {
     create(data: Prisma.CommentCreateInput): Promise<Comment>
     deleteComment(likeId: string): Promise<Comment | null>
     list(): Promise<Comment[]>
+    listByUser(userId: string): Promise<Comment[]>
 }
