@@ -1,5 +1,5 @@
 import { prisma } from "@/http/lib/prisma";
-import { Prisma} from "@prisma/client";
+import { Like, Prisma} from "@prisma/client";
 import { LikesRepository } from "../likesRepository";
 
 
@@ -9,6 +9,15 @@ export class PrismaLikesRepository implements LikesRepository {
 
         const like = await prisma.like.create({
             data
+        })
+        return like
+    }
+
+    async deleteLike(id: string): Promise<Like | null> {
+        const like = await prisma.like.delete({
+            where: {
+                id
+            }
         })
         return like
     }
