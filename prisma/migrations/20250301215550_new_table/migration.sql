@@ -21,8 +21,10 @@ CREATE TABLE "posts" (
 CREATE TABLE "likes" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "created_at" DATETIME NOT NULL,
-    "postId" TEXT NOT NULL,
-    CONSTRAINT "likes_postId_fkey" FOREIGN KEY ("postId") REFERENCES "posts" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+    "postId" TEXT,
+    "commentId" TEXT,
+    CONSTRAINT "likes_postId_fkey" FOREIGN KEY ("postId") REFERENCES "posts" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "likes_commentId_fkey" FOREIGN KEY ("commentId") REFERENCES "comments" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -31,15 +33,9 @@ CREATE TABLE "comments" (
     "content" TEXT NOT NULL,
     "created_at" DATETIME NOT NULL,
     "postId" TEXT NOT NULL,
-    CONSTRAINT "comments_postId_fkey" FOREIGN KEY ("postId") REFERENCES "posts" ("id") ON DELETE CASCADE ON UPDATE CASCADE
-);
-
--- CreateTable
-CREATE TABLE "comment_likes" (
-    "id" TEXT NOT NULL PRIMARY KEY,
-    "created_at" DATETIME NOT NULL,
-    "commentId" TEXT NOT NULL,
-    CONSTRAINT "comment_likes_commentId_fkey" FOREIGN KEY ("commentId") REFERENCES "comments" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+    "userId" TEXT NOT NULL,
+    CONSTRAINT "comments_postId_fkey" FOREIGN KEY ("postId") REFERENCES "posts" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "comments_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- CreateIndex
