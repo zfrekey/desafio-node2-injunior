@@ -8,17 +8,19 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
     
     const createBodySchema = z.object({
         created_at: z.coerce.date(),
-        postId: z.string()
+        postId: z.string(),
+        userId: z.string()
     })
 
-    const {created_at, postId} = createBodySchema.parse(request.body)
+    const {created_at, postId, userId} = createBodySchema.parse(request.body)
 
     try {
         const prismaLikesRepository = new PrismaLikesRepository()
         const createLikeUseCase = new CreateLikeUseCase(prismaLikesRepository)
         await createLikeUseCase.execute({
             created_at,
-            postId
+            postId,
+            userId
         })
     } catch (err) {
         throw err
