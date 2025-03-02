@@ -13,6 +13,11 @@ export class PrismaLikesRepository implements LikesRepository {
         return like
     }
 
+    async list(): Promise<Like[]> {
+        const likes = await prisma.like.findMany()
+        return likes
+    }
+
     async deleteLike(id: string): Promise<Like | null> {
         const like = await prisma.like.delete({
             where: {
