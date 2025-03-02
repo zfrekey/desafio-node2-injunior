@@ -5,4 +5,5 @@ export interface CommentsRepository {
     deleteComment(likeId: string): Promise<Comment | null>
     list(): Promise<Comment[]>
     listByUser(userId: string): Promise<Comment[]>
+    listByPost(postId: string): Promise<Comment[]>
 }
