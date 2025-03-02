@@ -3,6 +3,7 @@ import { create } from "./create";
 import { deleteLike } from "./delete";
 import { list } from "./list";
 import { getById } from "./get";
+import { listByPost } from "./listByPost";
 
 
 export async function likeRoutes(app: FastifyInstance) {
@@ -11,6 +12,7 @@ export async function likeRoutes(app: FastifyInstance) {
 
     app.get("/likes/:likeId", getById)
     app.get("/likes", list)
+    app.get("/likes/posts/:postId", listByPost)
 
     app.delete("/likes/:likeId", deleteLike)
 }
