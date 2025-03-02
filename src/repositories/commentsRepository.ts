@@ -2,8 +2,9 @@ import { Prisma, Comment} from "@prisma/client";
 
 export interface CommentsRepository {
     create(data: Prisma.CommentCreateInput): Promise<Comment>
-    deleteComment(likeId: string): Promise<Comment | null>
+    getById(commentId: string):Promise<Comment | null>
     list(): Promise<Comment[]>
     listByUser(userId: string): Promise<Comment[]>
     listByPost(postId: string): Promise<Comment[]>
+    deleteComment(likeId: string): Promise<Comment | null>
 }

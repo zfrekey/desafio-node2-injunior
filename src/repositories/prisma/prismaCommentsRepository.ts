@@ -12,6 +12,15 @@ export class PrismaCommentsRepository implements CommentsRepository {
         })
         return comment
     }
+
+    async getById(id: string): Promise<Comment | null> {
+        const comment = await prisma.comment.findUnique({
+            where: {
+                id
+            }
+        })
+        return comment
+    }
     
     async list(): Promise<Comment[]> {
         const comments = await prisma.comment.findMany()
