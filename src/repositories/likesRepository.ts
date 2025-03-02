@@ -5,5 +5,6 @@ export interface LikesRepository {
     getById(likeId: string): Promise<Like | null>
     list(): Promise<Like[]>
     listByPost(postId: string): Promise<Like[]>
+    listByUser(userId: string): Promise<Like[]>
     deleteLike(likeId: string): Promise<Like | null>
 }
