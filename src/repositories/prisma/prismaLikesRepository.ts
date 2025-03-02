@@ -13,6 +13,15 @@ export class PrismaLikesRepository implements LikesRepository {
         return like
     }
 
+    async getById(id: string): Promise<Like | null> {
+        const like = await prisma.like.findUnique({
+            where: {
+                id
+            }
+        })
+        return like
+    }
+
     async list(): Promise<Like[]> {
         const likes = await prisma.like.findMany()
         return likes
