@@ -1,6 +1,6 @@
 import { prisma } from "@/http/lib/prisma";
 import { Comment, Prisma } from "@prisma/client";
-import { CommentsRepository } from "../commentsRepository";
+import { CommentsRepository, CommentUpdateInput } from "../commentsRepository";
 
 
 export class PrismaCommentsRepository implements CommentsRepository {
@@ -45,7 +45,16 @@ export class PrismaCommentsRepository implements CommentsRepository {
         return comments
     }
 
-    
+    async update(commentId: string, data: CommentUpdateInput): Promise<Comment | null> {
+        const comment = await prisma.comment.update({
+            where: { id : commentId },  
+            data: {
+                content: data.content,
+                created_at: data.created_at
+            }
+        })
+        return comment
+    }
     
     async deleteComment(id: string): Promise<Comment | null> {
         const comment = await prisma.comment.delete({
