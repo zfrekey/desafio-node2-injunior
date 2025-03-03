@@ -9,10 +9,9 @@ export async function createForComment(request: FastifyRequest, reply: FastifyRe
     const createBodySchema = z.object({
         created_at: z.coerce.date(),
         commentId: z.string(),
-        userId: z.string()
     })
 
-    const {created_at, commentId, userId} = createBodySchema.parse(request.body)
+    const {created_at, commentId } = createBodySchema.parse(request.body)
 
     try {
         const prismaLikesRepository = new PrismaLikesRepository()
@@ -20,7 +19,7 @@ export async function createForComment(request: FastifyRequest, reply: FastifyRe
         await createLikeUseCase.execute({
             created_at,
             commentId,
-            userId
+            userId: request.user.sub
         })
     } catch (err) {
         throw err

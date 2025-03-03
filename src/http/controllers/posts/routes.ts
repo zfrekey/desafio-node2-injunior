@@ -5,15 +5,16 @@ import { update } from "./update";
 import { deletePost } from "./delete";
 import { list } from "./list";
 import { listByUser } from "./listByUser";
+import { verifyJwt } from "@/http/middleware/verifyJwt";
 
 export async function postRoutes(app: FastifyInstance) {
-    app.post("/posts", create)
+    app.post("/posts", {onRequest: [verifyJwt]}, create)
 
     app.get("/posts/:postId", getById)
     app.get("/posts", list)
     app.get("/posts/users/:userId", listByUser)
 
-    app.patch("/posts/:postId", update)
+    app.patch("/posts/:postId", {onRequest: [verifyJwt]}, update)
 
-    app.delete("/posts/:postId", deletePost)
+    app.delete("/posts/:postId", {onRequest: [verifyJwt]}, deletePost)
 }

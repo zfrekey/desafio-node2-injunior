@@ -9,10 +9,9 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
         title: z.string(),
         content: z.string(),
         created_at: z.coerce.date(),
-        userId: z.string()
     })
 
-    const {title,content,created_at, userId} = createBodySchema.parse(request.body)
+    const {title,content,created_at} = createBodySchema.parse(request.body)
 
     try {
         const prismaPostsRepository = new PrismaPostsRepository()
@@ -21,7 +20,7 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
             title,
             content,
             created_at,
-            userId
+            userId: request.user.sub
         })
     } catch (err) {
         throw err

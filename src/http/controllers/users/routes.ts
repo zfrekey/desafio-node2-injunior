@@ -16,11 +16,12 @@ export async function userRoutes(app: FastifyInstance) {
     app.get("/users/:userId", get)
     app.get("/users", list)
 
-    app.patch("/users/:userId", update)
+    app.patch("/users/:userId", {onRequest: [verifyJwt]}, update)
 
     app.patch("/token/refresh", refresh)
 
-    app.delete("/users/:userId", deleteUser)
+    app.delete("/users/:userId", {onRequest: [verifyJwt]}, deleteUser)
+
     //Authenticate
 
     app.get("/profile", {onRequest: [verifyJwt]}, profile) 
