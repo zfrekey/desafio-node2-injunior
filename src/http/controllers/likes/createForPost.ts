@@ -1,10 +1,10 @@
 
 import { PrismaLikesRepository } from "@/repositories/prisma/prismaLikesRepository"
-import { CreateLikeUseCase } from "@/use-cases/createLikeUseCase"
+import { CreateLikeForPostUseCase } from "@/use-cases/createLikeForPostUseCase"
 import { FastifyReply, FastifyRequest } from "fastify"
 import { z } from "zod"
 
-export async function create(request: FastifyRequest, reply: FastifyReply) {
+export async function createForPost(request: FastifyRequest, reply: FastifyReply) {
     
     const createBodySchema = z.object({
         created_at: z.coerce.date(),
@@ -16,7 +16,7 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
 
     try {
         const prismaLikesRepository = new PrismaLikesRepository()
-        const createLikeUseCase = new CreateLikeUseCase(prismaLikesRepository)
+        const createLikeUseCase = new CreateLikeForPostUseCase(prismaLikesRepository)
         await createLikeUseCase.execute({
             created_at,
             postId,
