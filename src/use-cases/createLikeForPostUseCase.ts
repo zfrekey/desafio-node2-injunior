@@ -2,21 +2,21 @@ import { LikesRepository } from "@/repositories/likesRepository"
 import { Like } from "@prisma/client"
 
 
-interface CreateLikeUseCaseRequest {
+interface CreateLikeForPostUseCaseRequest {
     created_at: Date
     postId: string
     userId: string
 }
 
-interface CreateLikeUseCaseResponse {
+interface CreateLikeForPostUseCaseResponse {
     like: Like
 }
 
-export class CreateLikeUseCase {
+export class CreateLikeForPostUseCase {
     constructor(private likesRepository: LikesRepository) {}
 
-    async execute({created_at, postId, userId}: CreateLikeUseCaseRequest): Promise<CreateLikeUseCaseResponse> {
-        const like = await this.likesRepository.create({
+    async execute({created_at, postId, userId}: CreateLikeForPostUseCaseRequest): Promise<CreateLikeForPostUseCaseResponse> {
+        const like = await this.likesRepository.createForPost({
             created_at,
             post: {
                 connect: { id: postId}

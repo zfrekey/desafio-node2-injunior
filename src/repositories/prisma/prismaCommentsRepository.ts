@@ -44,6 +44,8 @@ export class PrismaCommentsRepository implements CommentsRepository {
         })
         return comments
     }
+
+    
     
     async deleteComment(id: string): Promise<Comment | null> {
         const comment = await prisma.comment.delete({

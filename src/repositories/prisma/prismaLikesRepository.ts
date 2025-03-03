@@ -5,7 +5,15 @@ import { LikesRepository } from "../likesRepository";
 
 export class PrismaLikesRepository implements LikesRepository {
         
-    async create(data: Prisma.LikeCreateInput) {
+    async createForComment(data: Prisma.LikeCreateInput) {
+
+        const like = await prisma.like.create({
+            data
+        })
+        return like
+    }
+
+    async createForPost(data: Prisma.LikeCreateInput) {
 
         const like = await prisma.like.create({
             data
@@ -40,6 +48,15 @@ export class PrismaLikesRepository implements LikesRepository {
         const likes = await prisma.like.findMany({
             where: {
                 userId
+            }
+        })
+        return likes
+    }
+
+    async listByComment(commentId: string): Promise<Like[]> {
+        const likes = await prisma.like.findMany({
+            where: {
+                commentId
             }
         })
         return likes
