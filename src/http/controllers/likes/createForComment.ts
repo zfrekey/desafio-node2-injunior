@@ -1,7 +1,6 @@
 
 import { PrismaLikesRepository } from "@/repositories/prisma/prismaLikesRepository"
 import { CreateLikeForCommentUseCase } from "@/use-cases/createLikeForCommentUseCase"
-
 import { FastifyReply, FastifyRequest } from "fastify"
 import { z } from "zod"
 

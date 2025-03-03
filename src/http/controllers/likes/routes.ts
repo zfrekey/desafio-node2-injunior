@@ -10,8 +10,8 @@ import { createForComment } from "./createForComment";
 
 export async function likeRoutes(app: FastifyInstance) {
 
-    app.post("/likes", createForPost)
-    app.post("/likes", createForComment)
+    app.post("/likesForPost", createForPost)
+    app.post("/likesForComment", createForComment)
 
     app.get("/likes/:likeId", getById)
     app.get("/likes", list)
