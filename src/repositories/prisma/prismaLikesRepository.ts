@@ -5,7 +5,7 @@ import { LikesRepository } from "../likesRepository";
 
 export class PrismaLikesRepository implements LikesRepository {
         
-    async createForComment(data: Prisma.LikeCreateInput) {
+    async createForComment(data: Prisma.LikeUncheckedCreateInput) {
 
         const like = await prisma.like.create({
             data
@@ -13,7 +13,7 @@ export class PrismaLikesRepository implements LikesRepository {
         return like
     }
 
-    async createForPost(data: Prisma.LikeCreateInput) {
+    async createForPost(data: Prisma.LikeUncheckedCreateInput) {
 
         const like = await prisma.like.create({
             data

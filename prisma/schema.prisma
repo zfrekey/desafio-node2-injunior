@@ -31,7 +31,7 @@ model Post {
   id         String   @id @default(uuid())
   title      String
   content    String
-  created_at DateTime
+  created_at DateTime @default(now())
 
   userId   String
   user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -43,7 +43,7 @@ model Post {
 
 model Like {
   id         String   @id @default(uuid())
-  created_at DateTime
+  created_at DateTime @default(now())
 
   postId    String?
   commentId String?
@@ -58,7 +58,7 @@ model Like {
 model Comment {
   id         String   @id @default(uuid())
   content    String
-  created_at DateTime
+  created_at DateTime @default(now())
 
   postId String
   userId String

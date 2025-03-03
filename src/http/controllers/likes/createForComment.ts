@@ -7,17 +7,15 @@ import { z } from "zod"
 export async function createForComment(request: FastifyRequest, reply: FastifyReply) {
     
     const createBodySchema = z.object({
-        created_at: z.coerce.date(),
         commentId: z.string(),
     })
 
-    const {created_at, commentId } = createBodySchema.parse(request.body)
+    const { commentId } = createBodySchema.parse(request.body)
 
     try {
         const prismaLikesRepository = new PrismaLikesRepository()
         const createLikeUseCase = new CreateLikeForCommentUseCase(prismaLikesRepository)
         await createLikeUseCase.execute({
-            created_at,
             commentId,
             userId: request.user.sub
         })

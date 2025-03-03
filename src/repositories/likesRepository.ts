@@ -1,8 +1,8 @@
 import { Prisma, Like} from "@prisma/client";
 
 export interface LikesRepository {
-    createForPost(data: Prisma.LikeCreateInput): Promise<Like>
-    createForComment(data: Prisma.LikeCreateInput): Promise<Like>
+    createForPost(data: Prisma.LikeUncheckedCreateInput): Promise<Like>
+    createForComment(data: Prisma.LikeUncheckedCreateInput): Promise<Like>
     getById(likeId: string): Promise<Like | null>
     list(): Promise<Like[]>
     listByPost(postId: string): Promise<Like[]>

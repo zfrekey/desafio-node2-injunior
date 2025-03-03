@@ -12,11 +12,10 @@ export async function update(request: FastifyRequest, reply: FastifyReply) {
 
     const updateBodySchema = z.object({
         content: z.string().optional(),
-        created_at: z.coerce.date().optional(),
     })
 
     const {commentId} = updateParamsSchema.parse(request.params)
-    const {content, created_at} = updateBodySchema.parse(request.body)
+    const {content} = updateBodySchema.parse(request.body)
 
     try {
         const prismaCommentsRepository = new PrismaCommentsRepository()
@@ -24,9 +23,8 @@ export async function update(request: FastifyRequest, reply: FastifyReply) {
         const comment = await updateCommentUseCase.execute({
             commentId,
             data: {
-                content,
-                created_at
-            }
+                content
+            }   
         })
 
         return reply.status(200).send({ comment })

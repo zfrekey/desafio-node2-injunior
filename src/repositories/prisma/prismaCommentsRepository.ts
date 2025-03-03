@@ -5,7 +5,7 @@ import { CommentsRepository, CommentUpdateInput } from "../commentsRepository";
 
 export class PrismaCommentsRepository implements CommentsRepository {
 
-    async create(data: Prisma.CommentCreateInput) {
+    async create(data: Prisma.CommentUncheckedCreateInput) {
 
         const comment = await prisma.comment.create({
             data
@@ -48,10 +48,7 @@ export class PrismaCommentsRepository implements CommentsRepository {
     async update(commentId: string, data: CommentUpdateInput): Promise<Comment | null> {
         const comment = await prisma.comment.update({
             where: { id : commentId },  
-            data: {
-                content: data.content,
-                created_at: data.created_at
-            }
+            data
         })
         return comment
     }
