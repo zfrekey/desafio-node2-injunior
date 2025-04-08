@@ -24,10 +24,15 @@
     "scriptjs": "2.5.9",
     "tsup": "^8.3.6",
     "tsx": "^4.19.2",
-    "typescript": "^5.7.3",
     "zod": "^3.24.2"
   },
   "devDependencies": {
-    "prisma": "^6.4.0"
+    "@eslint/js": "9.24.0",
+    "eslint": "9.24.0",
+    "prettier": "3.5.3",
+    "prettier-plugin-prisma": "5.0.0",
+    "prisma": "^6.4.0",
+    "typescript": "5.8.3",
+    "typescript-eslint": "8.29.1"
   }
 }

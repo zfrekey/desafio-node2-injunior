@@ -1,6 +1,7 @@
 import { app } from "@/app"
+import { env } from "./env"
 
-const porta = 3333
+const porta = env.PORT
 
 app.listen({
     host: '0.0.0.0',  
