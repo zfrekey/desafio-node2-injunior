@@ -1,6 +1,7 @@
 import { UsersRepository } from "@/repositories/usersRepository"
 import { hash } from "bcryptjs"
 import { UserAlreadyExists } from "./errors/userAlreadyExists"
+import { registerEmail } from "@/services/register"
 
 interface RegisterUseCaseRequest {
     name: string
@@ -28,6 +29,8 @@ export class RegisterUseCase {
             password: password_hash,
             photo
         })
+
+        registerEmail(email)
     }
 
 }
